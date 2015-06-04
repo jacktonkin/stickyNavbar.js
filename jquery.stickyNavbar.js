@@ -100,7 +100,13 @@
           sectionOffsets[sections[i].id] = sections[i].offsetTop;
         }
 
-        var toScroll = $self.hasClass(options.unstickyModeClass) ? sectionOffsets[currentHref] - 2 * thisHeight + 2 + 'px' : sectionOffsets[currentHref] - thisHeight + 2 + 'px';
+        if (!options.mobile && $(window).width() < options.mobileWidth) {
+          var toScroll = sectionOffsets[currentHref] + 2 + 'px';
+        } else if ($self.hasClass(options.unstickyModeClass)) {
+          var toScroll = sectionOffsets[currentHref] - 2 * thisHeight + 2 + 'px';
+        } else {
+          var toScroll = sectionOffsets[currentHref] - thisHeight + 2 + 'px';
+        }
 
         // on nav click navigate to selected section
         $('html, body').stop().animate({
