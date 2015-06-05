@@ -48,7 +48,7 @@
       sections = $('.' + options.sectionSelector);
 
     // Make sections focusable by scripts
-    sections.attr('tabindex', -1);
+    sections.prepend('<a class="scrollto__keyboard-focus" tabindex="-1"></a>');
 
     return this.each(function() {
 
@@ -110,7 +110,7 @@
           easing: options.easing,
           complete: function () {
             // Set keyboard focus to selected section
-            document.getElementById(currentHref).focus();
+            $(href).find('.scrollto__keyboard-focus').get(0).focus();
           }
         });
       });
