@@ -41,6 +41,7 @@
         selector: 'a', // Selector to which activeClass will be added, either 'a' or 'li'
         mobile: false, // If false, nav will not stick under viewport width of 480px (default) or user defined mobileWidth
         mobileWidth: 480, // The viewport width (without scrollbar) under which stickyNavbar will not be applied (due user usability on mobile)
+        sidebar: false, // The navbar's height shouldn't affect scrolling calculations
         zindex: 9999, // The zindex value to apply to the element: default 9999, other option is 'auto'
         stickyModeClass: 'sticky', // Class that will be applied to 'this' in sticky mode
         unstickyModeClass: 'unsticky' // Class that will be applied to 'this' in non-sticky mode
@@ -100,7 +101,7 @@
           sectionOffsets[sections[i].id] = sections[i].offsetTop;
         }
 
-        if (!options.mobile && $(window).width() < options.mobileWidth) {
+        if (options.sidebar || !options.mobile && $(window).width() < options.mobileWidth) {
           var toScroll = sectionOffsets[currentHref] + 2 + 'px';
         } else if ($self.hasClass(options.unstickyModeClass)) {
           var toScroll = sectionOffsets[currentHref] - 2 * thisHeight + 2 + 'px';
